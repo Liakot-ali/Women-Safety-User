@@ -63,7 +63,7 @@ public class DrawerBaseActivity extends AppCompatActivity implements NavigationV
                 overridePendingTransition(0, 0);
                 break;
             case R.id.nav_danger:
-                startActivity(new Intent(this, DangerActivity.class));
+                startActivity(new Intent(this, EmergencyActivity.class));
                 overridePendingTransition(0, 0);
                 break;
         }

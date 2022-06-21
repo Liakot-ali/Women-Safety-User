@@ -191,7 +191,7 @@
                 <ImageView
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    android:src="@drawable/ic_danger"
+                    android:src="@drawable/ic_emergency"
                     android:padding="10dp"/>
                 <TextView
                     android:layout_width="wrap_content"
@@ -200,7 +200,7 @@
                     android:textSize="15dp"
                     android:gravity="center"
                     android:layout_marginTop="5dp"
-                    android:text="Are u in danger?"/>
+                    android:text="Emergency"/>
 
             </LinearLayout>
 

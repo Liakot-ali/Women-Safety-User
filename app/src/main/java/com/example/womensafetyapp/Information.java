@@ -13,8 +13,6 @@ public class Information extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_information);
 
-        getSupportActionBar().hide();
-
         toolbar = (Toolbar) findViewById(R.id.toolbarid);
         setSupportActionBar(toolbar);
     }

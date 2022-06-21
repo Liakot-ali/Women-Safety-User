@@ -44,7 +44,7 @@ public class HomeActivity extends DrawerBaseActivity implements View.OnClickList
             case R.id.complaintid : i= new Intent(this,Complaint2.class);startActivity(i); break;
             case R.id.scholarid : i= new Intent(this,Scholar2.class);startActivity(i); break;
             case R.id.supportid : i= new Intent(this,Support2.class);startActivity(i); break;
-            case R.id.dangerid : i= new Intent(this,Danger2.class);startActivity(i); break;
+            case R.id.dangerid : i= new Intent(this,Emergency1.class);startActivity(i); break;
             default:break;
         }
 
