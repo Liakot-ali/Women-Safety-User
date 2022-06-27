@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 public class Emergency1 extends AppCompatActivity implements View.OnClickListener {
-    private CardView location,police,hospital;
+    private CardView location,contact,police,hospital;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
