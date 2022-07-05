@@ -7,6 +7,10 @@
     android:orientation="vertical"
     tools:context=".Emergency1">
 
+    <include
+        android:id="@+id/toolbarid"
+        layout="@layout/toolbar"/>
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/locationid"
         android:layout_width="200dp"

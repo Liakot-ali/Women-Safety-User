@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
 public class Emergency1 extends AppCompatActivity implements View.OnClickListener {
@@ -14,6 +15,9 @@ public class Emergency1 extends AppCompatActivity implements View.OnClickListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emergency1);
+
+        Toolbar toolbar = findViewById(R.id.toolbarid);
+        setSupportActionBar(toolbar);
 
         location = (CardView) findViewById(R.id.locationid);
         police =(CardView) findViewById(R.id.policeid);

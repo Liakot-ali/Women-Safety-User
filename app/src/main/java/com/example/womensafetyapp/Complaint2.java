@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 public class Complaint2 extends AppCompatActivity {
 
@@ -15,6 +16,9 @@ public class Complaint2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complaint2);
+
+        Toolbar toolbar = findViewById(R.id.toolbarid);
+        setSupportActionBar(toolbar);
 
         EditText inputText = findViewById(R.id.EditText);
         TextView outputText = findViewById(R.id.output);

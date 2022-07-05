@@ -58,6 +58,8 @@ public class Login extends AppCompatActivity {
                        public void onSuccess(AuthResult authResult) {
                            Toast.makeText(Login.this, "Loggedin Successfully", Toast.LENGTH_SHORT).show();
                            checkUserAccessLevel(authResult.getUser().getUid());
+//                           startActivity(new Intent(getApplicationContext(),HomeActivity.class));
+//                           finish();
                        }
                    }).addOnFailureListener(new OnFailureListener() {
                        @Override

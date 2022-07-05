@@ -6,10 +6,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="10dp"
     tools:context=".Complaint2">
 
+    <include
+        android:id="@+id/toolbarid"
+        layout="@layout/toolbar"/>
+
     <EditText
+        android:layout_marginTop="20dp"
         android:id="@+id/EditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

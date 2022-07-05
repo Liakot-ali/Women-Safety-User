@@ -21,21 +21,27 @@
             android:value=" AIzaSyBXUo717o-AO5OdQr6XzahxI4EZC3PQQ2U" />
         <activity
             android:name=".NearbyHospital"
-            android:exported="false" />
+            android:exported="false"
+            />
         <activity
             android:name=".NearbyPolice"
             android:exported="false" />
         <activity
             android:name=".CurrentLocation"
             android:exported="false" />
-        <activity android:name=".Emergency1" />
+        <activity android:name=".Emergency1"
+            android:label="Emergency"/>
         <activity android:name=".ComplaintShow" />
         <activity android:name=".Admin" />
-        <activity android:name=".Scholar2" />
-        <activity android:name=".Support2" />
+        <activity android:name=".Scholar2"
+            android:label="Scholar"/>
+        <activity android:name=".Support2"
+            android:label="Support"/>
         <activity android:name=".Chat2" />
-        <activity android:name=".Complaint2" />
-        <activity android:name=".Information" />
+        <activity android:name=".Complaint2"
+            android:label="Complaint"/>
+        <activity android:name=".Information"
+            android:label="Information"/>
         <activity android:name=".DrawerBaseActivity" />
         <activity android:name=".EmergencyActivity" />
         <activity android:name=".SupportActivity" />

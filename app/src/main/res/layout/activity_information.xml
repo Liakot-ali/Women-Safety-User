@@ -6,6 +6,11 @@
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".Information">
+
+    <include
+        android:id="@+id/toolbarid"
+        layout="@layout/toolbar"/>
+
     <EditText
         android:id="@+id/nameid"
         android:layout_width="match_parent"
@@ -13,7 +18,7 @@
         android:background="@drawable/round_back_dark_blue"
         android:hint="Name"
         android:maxLines="1"
-        android:inputType="phone"
+        android:inputType="text"
         android:textSize="16sp"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
@@ -115,7 +120,8 @@
         android:layout_height="55dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:text="Update"
+        android:text="Update Profile"
+        android:onClick="updateProfile"
         android:textAllCaps="false"
         android:layout_marginTop="40dp"
         android:background="@drawable/round_back_primary"
