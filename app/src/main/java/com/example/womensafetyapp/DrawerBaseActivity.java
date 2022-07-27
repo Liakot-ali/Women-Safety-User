@@ -12,6 +12,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.womensafetyapp.Chatting.ActivityChatMessage;
 import com.google.android.material.navigation.NavigationView;
 
 
@@ -55,7 +56,7 @@ public class DrawerBaseActivity extends AppCompatActivity implements NavigationV
                 overridePendingTransition(0, 0);
                 break;
             case R.id.nav_chat:
-                startActivity(new Intent(this, ChatActivity.class));
+                startActivity(new Intent(this, ActivityChatMessage.class));
                 overridePendingTransition(0, 0);
                 break;
             case R.id.nav_support:

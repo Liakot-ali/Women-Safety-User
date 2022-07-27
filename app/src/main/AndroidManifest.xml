@@ -3,10 +3,10 @@
     package="com.example.womensafetyapp">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="com.google.android.providers.gsf.permisson.READ_GSERVICES"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permisson.READ_GSERVICES" />
 
     <application
         android:allowBackup="true"
@@ -15,33 +15,41 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WomenSafetyApp">
+        <activity
+            android:name=".Chatting.ActivityChatMessage"
+            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value=" AIzaSyBXUo717o-AO5OdQr6XzahxI4EZC3PQQ2U" />
+
         <activity
             android:name=".NearbyHospital"
-            android:exported="false"
-            />
+            android:exported="false" />
         <activity
             android:name=".NearbyPolice"
             android:exported="false" />
         <activity
             android:name=".CurrentLocation"
             android:exported="false" />
-        <activity android:name=".Emergency1"
-            android:label="Emergency"/>
+        <activity
+            android:name=".Emergency1"
+            android:label="Emergency" />
         <activity android:name=".ComplaintShow" />
         <activity android:name=".Admin" />
-        <activity android:name=".Scholar2"
-            android:label="Scholar"/>
-        <activity android:name=".Support2"
-            android:label="Support"/>
+        <activity
+            android:name=".Scholar2"
+            android:label="Scholar" />
+        <activity
+            android:name=".Support2"
+            android:label="Support" />
         <activity android:name=".Chat2" />
-        <activity android:name=".Complaint2"
-            android:label="Complaint"/>
-        <activity android:name=".Information"
-            android:label="Information"/>
+        <activity
+            android:name=".Complaint2"
+            android:label="Complaint" />
+        <activity
+            android:name=".Information"
+            android:label="Information" />
         <activity android:name=".DrawerBaseActivity" />
         <activity android:name=".EmergencyActivity" />
         <activity android:name=".SupportActivity" />

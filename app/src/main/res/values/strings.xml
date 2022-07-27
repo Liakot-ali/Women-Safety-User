@@ -2,4 +2,10 @@
     <string name="app_name">WomenSafetyApp</string>
     <string name="open">open</string>
     <string name="close">close</string>
+    <dimen name="head_line_text">22sp</dimen>
+    <dimen name="normal_text">20sp</dimen>
+    <dimen name="small_text">16sp</dimen>
+
+    <dimen name="inner_pad">5sp</dimen>
+    <dimen name="message_pad">3sp</dimen>
 </resources>
