@@ -14,5 +14,6 @@ public class ComplaintActivity extends DrawerBaseActivity {
         activityComplaintBinding= ActivityComplaintBinding.inflate(getLayoutInflater());
         setContentView(activityComplaintBinding.getRoot());
         allocateActivityTitle("Complaint");
+
     }
 }
