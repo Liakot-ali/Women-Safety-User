@@ -75,7 +75,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:background="@drawable/edit_text_style"
+                    android:minHeight="48sp"
                     android:ems="10"
+                    android:paddingStart="@dimen/inner_pad"
                     android:hint="Write here..."
                     android:inputType="textMultiLine" />
 
