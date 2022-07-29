@@ -11,6 +11,7 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.telephony.SmsManager;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,6 +19,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import com.example.womensafetyapp.model.ClassUserInfo;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -26,6 +28,11 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.IOException;
 import java.util.List;
@@ -38,6 +45,11 @@ public class CurrentLocation extends FragmentActivity implements OnMapReadyCallb
     GoogleApiClient client;
     LocationManager locationManager;
     LocationListener locationListener;
+
+    DocumentReference userRef;
+    String userId, userName;
+
+    String emergency1, emergency2;
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -56,12 +68,13 @@ public class CurrentLocation extends FragmentActivity implements OnMapReadyCallb
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_current_location);
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+
+        SupportMapFragment mapFragment = (SupportMapFragment) (getSupportFragmentManager()
+                .findFragmentById(R.id.map));
         mapFragment.getMapAsync(this);
-        ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.SEND_SMS},PackageManager.PERMISSION_GRANTED);
-        ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},PackageManager.PERMISSION_GRANTED);
-        ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.INTERNET},PackageManager.PERMISSION_GRANTED);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, PackageManager.PERMISSION_GRANTED);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, PackageManager.PERMISSION_GRANTED);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.INTERNET}, PackageManager.PERMISSION_GRANTED);
 
     }
 
@@ -77,44 +90,50 @@ public class CurrentLocation extends FragmentActivity implements OnMapReadyCallb
             public void onLocationChanged(Location location) {
                 mMap.clear();
                 try {
-
                     LatLng userLocation = new LatLng(location.getLatitude(), location.getLongitude());
                     mMap.addMarker(new MarkerOptions().position(userLocation).title("Your Location"));
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(userLocation));
                     //mMap.animateCamera(CameraUpdateFactory.zoomBy(10));
 
-                    String message = "I'm in danger. Please help me. My location is: \n" + "Latitude: " + location.getLatitude() + "\nLongitude: " + location.getLongitude();
-                    //TODO------get the emergency number from firebase database
-                    String phone1 = "+88017976";
-                    String phone2 = "+8801767568";
+
+                    getUserInfo();
+                    Log.d("Number", emergency1 + " " + emergency2);
+                    String message = "I'm " + userName + ". I'm in danger. Please help me. My location is: \n" + "Latitude: " + location.getLatitude() + "\nLongitude: " + location.getLongitude();
                     SmsManager manager = SmsManager.getDefault();
-                    manager.sendTextMessage(phone1, null, message, null, null);
-                    manager.sendTextMessage(phone2, null, message, null, null);
-                }catch (Exception e){
+                    if (emergency1.length() >= 10) {
+                        if (emergency1.length() == 11) {
+                            emergency1 = "+88" + emergency1;
+                        }
+                        manager.sendTextMessage(emergency1, null, message, null, null);
+                        Log.e("SendSMS", "Sms send in emergency 1" + emergency1);
+                    }
+                    if (emergency2.length() >= 10) {
+                        if (emergency1.length() == 11) {
+                            emergency1 = "+88" + emergency1;
+                        }
+                        Log.e("SendSMS", "Sms send in emergency 2" + emergency2);
+                        manager.sendTextMessage(emergency2, null, message, null, null);
+                    }
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
-
                 Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
                 try {
-                    List<Address> listAddress=geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),1);
-                    if(listAddress!=null&&listAddress.size()>0)
-                    {
-                        String address="";
-                        if(listAddress.get(0).getAdminArea()!=null)
-                        {
-                            address+=listAddress.get(0).getAdminArea()+" ";
+                    List<Address> listAddress = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+                    if (listAddress != null && listAddress.size() > 0) {
+                        String address = "";
+                        if (listAddress.get(0).getAdminArea() != null) {
+                            address += listAddress.get(0).getAdminArea() + " ";
                         }
 
-                        if(listAddress.get(0).getLocality()!=null)
-                        {
-                            address+=listAddress.get(0).getLocality()+" ";
+                        if (listAddress.get(0).getLocality() != null) {
+                            address += listAddress.get(0).getLocality() + " ";
                         }
 
-                        if(listAddress.get(0).getThoroughfare()!=null)
-                        {
-                            address+= listAddress.get(0).getThoroughfare()+" ";
+                        if (listAddress.get(0).getThoroughfare() != null) {
+                            address += listAddress.get(0).getThoroughfare() + " ";
                         }
-                        Toast.makeText(CurrentLocation.this,address,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CurrentLocation.this, address, Toast.LENGTH_SHORT).show();
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -141,7 +160,7 @@ public class CurrentLocation extends FragmentActivity implements OnMapReadyCallb
         try {
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 100, 1, locationListener);
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 100, 1, locationListener);
-        }catch (SecurityException e){
+        } catch (SecurityException e) {
             e.printStackTrace();
         }
 
@@ -156,21 +175,37 @@ public class CurrentLocation extends FragmentActivity implements OnMapReadyCallb
                 // for ActivityCompat#requestPermissions for more details.
                 return;
             }
-           locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 100, 1, locationListener);
-        } else {
-            if (ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},1);
-            } else {
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 100, 1, locationListener);
-                Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-
-                mMap.clear();
-                LatLng userLocation = new LatLng(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
-                mMap.addMarker(new MarkerOptions().position(userLocation).title("Your Location"));
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(userLocation));
-
-            }
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 100, 1, locationListener);
         }
+//        else {
+//            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+//            {
+//                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+//            } else {
+//                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 100, 1, locationListener);
+//                Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+//
+//                mMap.clear();
+//                LatLng userLocation = new LatLng(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
+//                mMap.addMarker(new MarkerOptions().position(userLocation).title("Your Location"));
+//                mMap.moveCamera(CameraUpdateFactory.newLatLng(userLocation));
+//
+//            }
+//        }
+    }
+    public void getUserInfo(){
+        userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        userRef = FirebaseFirestore.getInstance().collection("Users").document(userId);
+        userRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                ClassUserInfo info = documentSnapshot.toObject(ClassUserInfo.class);
+                assert info != null;
+                userName = info.getName();
+                emergency1 = info.getEmergency1();
+                emergency2 = info.getEmergency2();
+            }
+        });
     }
 
 }

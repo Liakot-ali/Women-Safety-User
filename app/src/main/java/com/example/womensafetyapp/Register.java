@@ -13,8 +13,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.womensafetyapp.model.ClassUserInfo;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -65,16 +68,26 @@ public class Register extends AppCompatActivity {
                             FirebaseUser user = fAuth.getCurrentUser();
                             Toast.makeText(Register.this, "Account Created", Toast.LENGTH_SHORT).show();
                             DocumentReference df = fStore.collection("Users").document(user.getUid());
-                            Map<String,Object> userInfo = new HashMap<>();
-                            userInfo.put("UserName",Username.getText().toString());
-                            userInfo.put("UserEmail",email.getText().toString());
-                            userInfo.put("MobileNumber",mobile.getText().toString());
+                            ClassUserInfo newUser = new ClassUserInfo(Username.getText().toString(), mobile.getText().toString(), "", "", "", "",user.getUid());
+//                            Map<String,Object> userInfo = new HashMap<>();
+//                            userInfo.put("UserName",Username.getText().toString());
+//                            userInfo.put("UserEmail",email.getText().toString());
+//                            userInfo.put("MobileNumber",mobile.getText().toString());
+//                            userInfo.put("isUser","1");
+//                            df.set(userInfo);
+                            df.set(newUser).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isSuccessful()){
+                                        Toast.makeText(Register.this, "Upload user data Successfully", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(getApplicationContext(),Login.class));
+                                        finish();
+                                    }else{
+                                        Toast.makeText(Register.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
 
-                            userInfo.put("isUser","1");
-
-                            df.set(userInfo);
-                            startActivity(new Intent(getApplicationContext(),Login.class));
-                            finish();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override

@@ -25,7 +25,7 @@
     </androidx.appcompat.widget.Toolbar>
 
     <EditText
-        android:id="@+id/nameid"
+        android:id="@+id/profileName"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:background="@drawable/round_back_dark_blue"
@@ -39,7 +39,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginTop="20dp"/>
     <EditText
-        android:id="@+id/numberid"
+        android:id="@+id/profileNumber"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:background="@drawable/round_back_dark_blue"
@@ -54,13 +54,13 @@
         android:layout_marginTop="20dp"/>
 
     <EditText
-        android:id="@+id/fathersnameid"
+        android:id="@+id/profileFatherName"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:background="@drawable/round_back_dark_blue"
         android:hint="Father's Name"
         android:maxLines="1"
-        android:inputType="textEmailAddress"
+        android:inputType="text"
         android:textSize="16sp"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
@@ -74,7 +74,7 @@
         android:background="@drawable/round_back_dark_blue"
         android:hint="Emergency Contact 1"
         android:maxLines="1"
-        android:inputType="textEmailAddress"
+        android:inputType="phone"
         android:textSize="16sp"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
@@ -88,7 +88,7 @@
         android:background="@drawable/round_back_dark_blue"
         android:hint="Emergency Contact 2"
         android:maxLines="1"
-        android:inputType="textEmailAddress"
+        android:inputType="phone"
         android:textSize="16sp"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
@@ -97,13 +97,13 @@
         android:layout_marginTop="20dp"/>
 
     <EditText
-        android:id="@+id/address"
+        android:id="@+id/profileAddress"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:background="@drawable/round_back_dark_blue"
         android:hint="Address"
         android:maxLines="1"
-        android:inputType="phone"
+        android:inputType="textPostalAddress"
         android:textSize="16sp"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"

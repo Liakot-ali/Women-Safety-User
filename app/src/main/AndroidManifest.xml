@@ -32,7 +32,11 @@
             android:exported="false" />
         <activity
             android:name=".CurrentLocation"
-            android:exported="false" />
+            android:exported="false">
+            <meta-data
+                android:name="com.google.android.gms.version"
+                android:value="@integer/google_play_services_version" />
+        </activity>
         <activity
             android:name=".Emergency1"
             android:label="Emergency" />
