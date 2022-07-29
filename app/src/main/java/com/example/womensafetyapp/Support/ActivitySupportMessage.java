@@ -1,10 +1,4 @@
-package com.example.womensafetyapp.Chatting;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+package com.example.womensafetyapp.Support;
 
 import android.os.Bundle;
 import android.text.Editable;
@@ -16,8 +10,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.womensafetyapp.R;
 import com.example.womensafetyapp.adapter.AdapterChatMessage;
+import com.example.womensafetyapp.Chatting.ClassChatMessage;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -30,8 +32,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class ActivityChatMessage extends AppCompatActivity {
-
+public class ActivitySupportMessage extends AppCompatActivity {
     Toolbar toolbar;
     TextView title, emptyText;
     RecyclerView recyclerView;
@@ -45,12 +46,12 @@ public class ActivityChatMessage extends AppCompatActivity {
 
     FirebaseDatabase database, userDatabase;
     FirebaseAuth mAuth;
-    DatabaseReference adminRef, requestRef;
+    DatabaseReference supportRef, requestRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_message);
+        setContentView(R.layout.activity_support_message);
         Initialize();
         submit.setEnabled(false);
         messageEditText.addTextChangedListener(new TextWatcher() {
@@ -77,8 +78,8 @@ public class ActivityChatMessage extends AppCompatActivity {
 //                String date = java.text.DateFormat.getDateTimeInstance().format(new Date());
 
                 ClassChatMessage newMsg = new ClassChatMessage(message, "User", userId, "Admin", userId);
-                Log.e("FireBase:", adminRef.toString());
-                adminRef.child(String.valueOf(timeInMills)).setValue(newMsg).addOnCompleteListener(new OnCompleteListener<Void>() {
+                Log.e("FireBase:", supportRef.toString());
+                supportRef.child(String.valueOf(timeInMills)).setValue(newMsg).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
@@ -88,13 +89,13 @@ public class ActivityChatMessage extends AppCompatActivity {
                             recyclerView.scrollToPosition(messageList.size() - 1);
                             messageEditText.setText("");
                         }else{
-                            Toast.makeText(ActivityChatMessage.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ActivitySupportMessage.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(ActivityChatMessage.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ActivitySupportMessage.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -102,28 +103,28 @@ public class ActivityChatMessage extends AppCompatActivity {
     }
 
     private void Initialize() {
-        toolbar = findViewById(R.id.messageToolbar);
-        title = findViewById(R.id.messageToolbarTitle);
-        emptyText = findViewById(R.id.messageEmptyText);
-        recyclerView = findViewById(R.id.messageRecyclerView);
-        messageEditText = findViewById(R.id.messageEditText);
-        submit = findViewById(R.id.messageSubmitBtn);
+        toolbar = findViewById(R.id.supportToolbar);
+        title = findViewById(R.id.supportToolbarTitle);
+        emptyText = findViewById(R.id.supportEmptyText);
+        recyclerView = findViewById(R.id.supportRecyclerView);
+        messageEditText = findViewById(R.id.supportEditText);
+        submit = findViewById(R.id.supportSubmitBtn);
 
-        manager = new LinearLayoutManager(ActivityChatMessage.this);
+        manager = new LinearLayoutManager(ActivitySupportMessage.this);
         manager.setStackFromEnd(true);
         manager.setReverseLayout(false);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(manager);
 
-        title.setText("Women Safety Chat");
+        title.setText("Legal Support User Side");
 
         mAuth = FirebaseAuth.getInstance();
         userId = mAuth.getUid();
         database = FirebaseDatabase.getInstance("https://womensafetyapp-2af0f-default-rtdb.firebaseio.com/");
 
-        adminRef = database.getReference("Admin").child(userId);
+        supportRef = database.getReference("LegalSupport").child(userId);
         messageList = new ArrayList<>();
-        adminRef.addValueEventListener(new ValueEventListener() {
+        supportRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 messageList.clear();
@@ -143,10 +144,10 @@ public class ActivityChatMessage extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(ActivityChatMessage.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ActivitySupportMessage.this, error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-        adapter = new AdapterChatMessage(ActivityChatMessage.this, messageList);
+        adapter = new AdapterChatMessage(ActivitySupportMessage.this, messageList);
         recyclerView.setAdapter(adapter);
 //        recyclerView.scrollToPosition(messageList.size() - 1);
     }

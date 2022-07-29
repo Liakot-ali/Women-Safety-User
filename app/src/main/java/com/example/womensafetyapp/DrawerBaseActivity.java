@@ -13,6 +13,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.womensafetyapp.Chatting.ActivityChatMessage;
+import com.example.womensafetyapp.Support.ActivitySupportMessage;
 import com.google.android.material.navigation.NavigationView;
 
 
@@ -60,11 +61,11 @@ public class DrawerBaseActivity extends AppCompatActivity implements NavigationV
                 overridePendingTransition(0, 0);
                 break;
             case R.id.nav_support:
-                startActivity(new Intent(this, SupportActivity.class));
+                startActivity(new Intent(this, ActivitySupportMessage.class));
                 overridePendingTransition(0, 0);
                 break;
             case R.id.nav_danger:
-                startActivity(new Intent(this, EmergencyActivity.class));
+                startActivity(new Intent(this, Emergency1.class));
                 overridePendingTransition(0, 0);
                 break;
         }

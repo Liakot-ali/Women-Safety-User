@@ -5,10 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Chatting.ActivityChatMessage">
+    tools:context=".Scholar.ActivityScholarMessage">
+
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/messageToolbar"
+        android:id="@+id/scholarToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
@@ -16,7 +17,7 @@
         android:theme="?attr/actionBarTheme">
 
         <TextView
-            android:id="@+id/messageToolbarTitle"
+            android:id="@+id/scholarToolbarTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="User Name"
@@ -37,7 +38,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/messageEmptyText"
+                android:id="@+id/scholarEmptyText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -45,7 +46,7 @@
                 android:textSize="@dimen/normal_text" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/messageRecyclerView"
+                android:id="@+id/scholarRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/inner_pad"
@@ -74,19 +75,19 @@
                 android:weightSum="7">
 
                 <EditText
-                    android:id="@+id/messageEditText"
+                    android:id="@+id/scholarEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@drawable/edit_text_style"
                     android:ems="10"
-                    android:minHeight="48sp"
-                    android:paddingLeft="@dimen/message_pad"
                     android:hint="Write here..."
-                    android:inputType="textMultiLine" />
+                    android:inputType="textMultiLine"
+                    android:minHeight="48sp"
+                    android:paddingLeft="@dimen/message_pad" />
 
                 <ImageView
-                    android:id="@+id/messageSubmitBtn"
+                    android:id="@+id/scholarSubmitBtn"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"

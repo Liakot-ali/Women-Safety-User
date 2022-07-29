@@ -1,4 +1,4 @@
-package com.example.womensafetyapp.Chatting;
+package com.example.womensafetyapp.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.womensafetyapp.Chatting.ClassChatMessage;
 import com.example.womensafetyapp.R;
 
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class AdapterChatMessage extends RecyclerView.Adapter<AdapterChatMessage.
     Context context;
     ArrayList<ClassChatMessage> msgList;
 
-    AdapterChatMessage(Context context, ArrayList<ClassChatMessage> msgList){
+    public AdapterChatMessage(Context context, ArrayList<ClassChatMessage> msgList){
         this.context = context;
         this.msgList = msgList;
     }

@@ -174,7 +174,7 @@ public class NearbyPolice extends FragmentActivity implements OnMapReadyCallback
                 break;
             case R.id.B_policestations:
                 mMap.clear();
-                String policestation = "policestation";
+                String policestation = "police station";
                 String url = getUrl(latitude, longitude, policestation);
                 dataTransfer[0] = mMap;
                 dataTransfer[1] = url;

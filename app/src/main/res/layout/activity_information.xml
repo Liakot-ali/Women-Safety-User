@@ -2,21 +2,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:context=".Information">
 
-    <include
-        android:id="@+id/toolbarid"
-        layout="@layout/toolbar"/>
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" >
+        <TextView
+            android:id="@+id/informationToolbarTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Profile"
+            android:textSize="@dimen/normal_text"
+            android:textColor="@color/white"
+            android:padding="@dimen/inner_pad"
+            />
+    </androidx.appcompat.widget.Toolbar>
 
     <EditText
         android:id="@+id/nameid"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:background="@drawable/round_back_dark_blue"
-        android:hint="Name"
+        android:hint="Full Name"
         android:maxLines="1"
         android:inputType="text"
         android:textSize="16sp"
@@ -41,21 +54,6 @@
         android:layout_marginTop="20dp"/>
 
     <EditText
-        android:id="@+id/mothersnameid"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:background="@drawable/round_back_dark_blue"
-        android:hint="Mother's Name"
-        android:maxLines="1"
-        android:inputType="text"
-        android:textSize="16sp"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="20dp"/>
-
-    <EditText
         android:id="@+id/fathersnameid"
         android:layout_width="match_parent"
         android:layout_height="55dp"
@@ -69,41 +67,41 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginTop="20dp"/>
+    <EditText
+        android:id="@+id/emergencyContact1"
+        android:layout_width="match_parent"
+        android:layout_height="48sp"
+        android:background="@drawable/round_back_dark_blue"
+        android:hint="Emergency Contact 1"
+        android:maxLines="1"
+        android:inputType="textEmailAddress"
+        android:textSize="16sp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"/>
+    <EditText
+        android:id="@+id/emergencyContact2"
+        android:layout_width="match_parent"
+        android:layout_height="48sp"
+        android:background="@drawable/round_back_dark_blue"
+        android:hint="Emergency Contact 2"
+        android:maxLines="1"
+        android:inputType="textEmailAddress"
+        android:textSize="16sp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"/>
 
     <EditText
-        android:id="@+id/permanentaddressid"
+        android:id="@+id/address"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:background="@drawable/round_back_dark_blue"
-        android:hint="Permanent Address"
-        android:maxLines="1"
-        android:inputType="phone"
-        android:textSize="16sp"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="20dp"/>
-    <EditText
-        android:id="@+id/presentaddressid"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:background="@drawable/round_back_dark_blue"
-        android:hint="Present Address"
-        android:maxLines="1"
-        android:inputType="phone"
-        android:textSize="16sp"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="20dp"/>
-    <EditText
-        android:id="@+id/districtid"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:background="@drawable/round_back_dark_blue"
-        android:hint="District"
+        android:hint="Address"
         android:maxLines="1"
         android:inputType="phone"
         android:textSize="16sp"

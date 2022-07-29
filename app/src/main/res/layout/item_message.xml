@@ -16,28 +16,28 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginTop="@dimen/message_pad"
-            android:orientation="vertical">
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/chatMessageMe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:background="@drawable/message_style_me"
+                android:gravity="start"
+                android:padding="@dimen/message_pad"
+                android:text="This is"
+                android:textSize="@dimen/small_text" />
 
             <TextView
                 android:id="@+id/chatSentTimeMe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:padding="@dimen/message_pad"
                 android:layout_gravity="center"
-                android:minWidth="70sp"
-                android:text="20:58\n20/07/1988"
                 android:visibility="gone"/>
 
-            <TextView
-                android:id="@+id/chatMessageMe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/message_style_me"
-                android:gravity="start"
-                android:padding="@dimen/message_pad"
-                android:layout_gravity="end"
-                android:text="This is"
-                android:textSize="@dimen/small_text" />
         </LinearLayout>
 
     </LinearLayout>
@@ -53,17 +53,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/message_pad"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/chatSentTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:padding="@dimen/message_pad"
                 android:gravity="center"
-                android:minWidth="70sp"
-                android:text="20:58\n20/07/1988"
-                android:visibility="gone"/>
+                android:text="Admin"
+                android:visibility="visible"/>
 
             <TextView
                 android:id="@+id/chatMessage"

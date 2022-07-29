@@ -10,6 +10,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -32,6 +35,7 @@ public class CurrentLocation extends FragmentActivity implements OnMapReadyCallb
 
     private GoogleMap mMap;
 
+    GoogleApiClient client;
     LocationManager locationManager;
     LocationListener locationListener;
 
@@ -55,22 +59,41 @@ public class CurrentLocation extends FragmentActivity implements OnMapReadyCallb
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.SEND_SMS},PackageManager.PERMISSION_GRANTED);
+        ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},PackageManager.PERMISSION_GRANTED);
+        ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.INTERNET},PackageManager.PERMISSION_GRANTED);
 
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
-
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            mMap.setMyLocationEnabled(true);
+        }
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
                 mMap.clear();
-                LatLng userLocation = new LatLng(location.getLatitude(), location.getLongitude());
-                mMap.addMarker(new MarkerOptions().position(userLocation).title("Your Location"));
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(userLocation));
+                try {
+
+                    LatLng userLocation = new LatLng(location.getLatitude(), location.getLongitude());
+                    mMap.addMarker(new MarkerOptions().position(userLocation).title("Your Location"));
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(userLocation));
+                    //mMap.animateCamera(CameraUpdateFactory.zoomBy(10));
+
+                    String message = "I'm in danger. Please help me. My location is: \n" + "Latitude: " + location.getLatitude() + "\nLongitude: " + location.getLongitude();
+                    //TODO------get the emergency number from firebase database
+                    String phone1 = "+88017976";
+                    String phone2 = "+8801767568";
+                    SmsManager manager = SmsManager.getDefault();
+                    manager.sendTextMessage(phone1, null, message, null, null);
+                    manager.sendTextMessage(phone2, null, message, null, null);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
                 Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
                 try {
                     List<Address> listAddress=geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),1);
@@ -114,6 +137,14 @@ public class CurrentLocation extends FragmentActivity implements OnMapReadyCallb
             }
         };
 
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        try {
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 100, 1, locationListener);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 100, 1, locationListener);
+        }catch (SecurityException e){
+            e.printStackTrace();
+        }
+
         if (Build.VERSION.SDK_INT < 23) {
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 // TODO: Consider calling
@@ -125,7 +156,7 @@ public class CurrentLocation extends FragmentActivity implements OnMapReadyCallb
                 // for ActivityCompat#requestPermissions for more details.
                 return;
             }
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 100, 1, locationListener);
+           locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 100, 1, locationListener);
         } else {
             if (ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},1);
@@ -140,7 +171,6 @@ public class CurrentLocation extends FragmentActivity implements OnMapReadyCallb
 
             }
         }
-
-
     }
+
 }

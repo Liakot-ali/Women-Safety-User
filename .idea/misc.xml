@@ -18,11 +18,24 @@
         <entry key="../../../priom/professional/womensafety/app/src/main/res/layout/nav_header.xml" value="0.27717391304347827" />
         <entry key="../../../priom/professional/womensafety/app/src/main/res/layout/toolbar.xml" value="0.27717391304347827" />
         <entry key="../../../priom/professional/womensafety/app/src/main/res/menu/drawer_menu.xml" value="0.30885416666666665" />
+        <entry key="..\:/Our Sourcing/Android App/Chatting App/User/app/src/main/res/drawable-v24/edit_text_style.xml" value="0.278" />
+        <entry key="..\:/Our Sourcing/Android App/Chatting App/User/app/src/main/res/drawable/edit_text_style.xml" value="0.278" />
         <entry key="..\:/Our Sourcing/Android App/Chatting App/User/app/src/main/res/drawable/ic_message_send.xml" value="0.137" />
         <entry key="..\:/Our Sourcing/Android App/Chatting App/User/app/src/main/res/drawable/message_style.xml" value="0.278" />
         <entry key="..\:/Our Sourcing/Android App/Chatting App/User/app/src/main/res/drawable/message_style_me.xml" value="0.279" />
         <entry key="..\:/Our Sourcing/Android App/Chatting App/User/app/src/main/res/layout/activity_chat2.xml" value="0.27447916666666666" />
+        <entry key="..\:/Our Sourcing/Android App/Chatting App/User/app/src/main/res/layout/activity_current_location.xml" value="0.27447916666666666" />
+        <entry key="..\:/Our Sourcing/Android App/Chatting App/User/app/src/main/res/layout/activity_information.xml" value="0.27447916666666666" />
+        <entry key="..\:/Our Sourcing/Android App/Chatting App/User/app/src/main/res/layout/activity_login.xml" value="0.27447916666666666" />
+        <entry key="..\:/Our Sourcing/Android App/Chatting App/User/app/src/main/res/layout/activity_main.xml" value="0.27447916666666666" />
         <entry key="..\:/Our Sourcing/Android App/Chatting App/User/app/src/main/res/layout/activity_message.xml" value="0.27447916666666666" />
+        <entry key="..\:/Our Sourcing/Android App/Chatting App/User/app/src/main/res/layout/activity_nearby_hospital.xml" value="0.1" />
+        <entry key="..\:/Our Sourcing/Android App/Chatting App/User/app/src/main/res/layout/activity_nearby_police.xml" value="0.264" />
+        <entry key="..\:/Our Sourcing/Android App/Chatting App/User/app/src/main/res/layout/activity_profile.xml" value="0.27447916666666666" />
+        <entry key="..\:/Our Sourcing/Android App/Chatting App/User/app/src/main/res/layout/activity_register.xml" value="0.27447916666666666" />
+        <entry key="..\:/Our Sourcing/Android App/Chatting App/User/app/src/main/res/layout/activity_scholar2.xml" value="0.27447916666666666" />
+        <entry key="..\:/Our Sourcing/Android App/Chatting App/User/app/src/main/res/layout/activity_support.xml" value="0.27447916666666666" />
+        <entry key="..\:/Our Sourcing/Android App/Chatting App/User/app/src/main/res/layout/activity_support2.xml" value="0.27447916666666666" />
         <entry key="..\:/Our Sourcing/Android App/Chatting App/User/app/src/main/res/layout/item_message.xml" value="0.27447916666666666" />
         <entry key="..\:/Our Sourcing/Android App/Chatting App/app/src/main/res/layout/activity_admin.xml" value="0.27447916666666666" />
         <entry key="..\:/Our Sourcing/Android App/Chatting App/app/src/main/res/layout/activity_chat2.xml" value="0.27447916666666666" />

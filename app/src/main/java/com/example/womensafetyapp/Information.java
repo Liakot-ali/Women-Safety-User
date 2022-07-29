@@ -19,12 +19,12 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class Information extends AppCompatActivity {
     private static final String TAG = "InformationActivity";
-    EditText name, number,mothersname,fathersname,permanentaddress,presentaddress,district;
+    EditText name, number, fathersname, address, emergency1, emergency2;
 
     Button updatebtn;
 
     String Name = null;
-    Integer Number = null;
+    long Number;
     String Mothers_Name = null;
     String Fathers_Name = null;
     String Permanent_Address = null;
@@ -41,11 +41,10 @@ public class Information extends AppCompatActivity {
 
         name = findViewById(R.id.nameid);
         number = findViewById(R.id.numberid);
-        mothersname = findViewById(R.id.mothersnameid);
         fathersname = findViewById(R.id.fathersnameid);
-        permanentaddress = findViewById(R.id.permanentaddressid);
-        presentaddress = findViewById(R.id.presentaddressid);
-        district = findViewById(R.id.districtid);
+        emergency1 = findViewById(R.id.emergencyContact1);
+        emergency2 = findViewById(R.id.emergencyContact2);
+        address =  findViewById(R.id.address);
 
         updatebtn = findViewById(R.id.updateBtn);
 

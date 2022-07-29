@@ -1,4 +1,4 @@
-package com.example.womensafetyapp.Chatting;
+package com.example.womensafetyapp.Scholar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.womensafetyapp.Chatting.ClassChatMessage;
 import com.example.womensafetyapp.R;
 import com.example.womensafetyapp.adapter.AdapterChatMessage;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,8 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class ActivityChatMessage extends AppCompatActivity {
-
+public class ActivityScholarMessage extends AppCompatActivity {
     Toolbar toolbar;
     TextView title, emptyText;
     RecyclerView recyclerView;
@@ -45,13 +45,14 @@ public class ActivityChatMessage extends AppCompatActivity {
 
     FirebaseDatabase database, userDatabase;
     FirebaseAuth mAuth;
-    DatabaseReference adminRef, requestRef;
+    DatabaseReference supportRef, requestRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_message);
+        setContentView(R.layout.activity_scholar_message);
         Initialize();
+
         submit.setEnabled(false);
         messageEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -77,8 +78,8 @@ public class ActivityChatMessage extends AppCompatActivity {
 //                String date = java.text.DateFormat.getDateTimeInstance().format(new Date());
 
                 ClassChatMessage newMsg = new ClassChatMessage(message, "User", userId, "Admin", userId);
-                Log.e("FireBase:", adminRef.toString());
-                adminRef.child(String.valueOf(timeInMills)).setValue(newMsg).addOnCompleteListener(new OnCompleteListener<Void>() {
+                Log.e("FireBase:", supportRef.toString());
+                supportRef.child(String.valueOf(timeInMills)).setValue(newMsg).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
@@ -88,13 +89,13 @@ public class ActivityChatMessage extends AppCompatActivity {
                             recyclerView.scrollToPosition(messageList.size() - 1);
                             messageEditText.setText("");
                         }else{
-                            Toast.makeText(ActivityChatMessage.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ActivityScholarMessage.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(ActivityChatMessage.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ActivityScholarMessage.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -102,28 +103,28 @@ public class ActivityChatMessage extends AppCompatActivity {
     }
 
     private void Initialize() {
-        toolbar = findViewById(R.id.messageToolbar);
-        title = findViewById(R.id.messageToolbarTitle);
-        emptyText = findViewById(R.id.messageEmptyText);
-        recyclerView = findViewById(R.id.messageRecyclerView);
-        messageEditText = findViewById(R.id.messageEditText);
-        submit = findViewById(R.id.messageSubmitBtn);
+        toolbar = findViewById(R.id.scholarToolbar);
+        title = findViewById(R.id.scholarToolbarTitle);
+        emptyText = findViewById(R.id.scholarEmptyText);
+        recyclerView = findViewById(R.id.scholarRecyclerView);
+        messageEditText = findViewById(R.id.scholarEditText);
+        submit = findViewById(R.id.scholarSubmitBtn);
 
-        manager = new LinearLayoutManager(ActivityChatMessage.this);
+        manager = new LinearLayoutManager(ActivityScholarMessage.this);
         manager.setStackFromEnd(true);
         manager.setReverseLayout(false);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(manager);
 
-        title.setText("Women Safety Chat");
+        title.setText("Adk Scholar User Side");
 
         mAuth = FirebaseAuth.getInstance();
         userId = mAuth.getUid();
         database = FirebaseDatabase.getInstance("https://womensafetyapp-2af0f-default-rtdb.firebaseio.com/");
 
-        adminRef = database.getReference("Admin").child(userId);
+        supportRef = database.getReference("Scholar").child(userId);
         messageList = new ArrayList<>();
-        adminRef.addValueEventListener(new ValueEventListener() {
+        supportRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 messageList.clear();
@@ -143,11 +144,12 @@ public class ActivityChatMessage extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(ActivityChatMessage.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ActivityScholarMessage.this, error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-        adapter = new AdapterChatMessage(ActivityChatMessage.this, messageList);
+        adapter = new AdapterChatMessage(ActivityScholarMessage.this, messageList);
         recyclerView.setAdapter(adapter);
 //        recyclerView.scrollToPosition(messageList.size() - 1);
     }
+
 }

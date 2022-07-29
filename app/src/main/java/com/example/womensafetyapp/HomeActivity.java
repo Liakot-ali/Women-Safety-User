@@ -6,6 +6,8 @@ import android.view.View;
 
 import androidx.cardview.widget.CardView;
 
+import com.example.womensafetyapp.Scholar.ActivityScholarMessage;
+import com.example.womensafetyapp.Support.ActivitySupportMessage;
 import com.example.womensafetyapp.databinding.ActivityHomeBinding;
 
 
@@ -42,8 +44,8 @@ public class HomeActivity extends DrawerBaseActivity implements View.OnClickList
         switch (view.getId()){
             case R.id.profileid : i= new Intent(this,Information.class);startActivity(i); break;
             case R.id.complaintid : i= new Intent(this,Complaint2.class);startActivity(i); break;
-            case R.id.scholarid : i= new Intent(this,Scholar2.class);startActivity(i); break;
-            case R.id.supportid : i= new Intent(this,Support2.class);startActivity(i); break;
+            case R.id.scholarid : i= new Intent(this, ActivityScholarMessage.class);startActivity(i); break;
+            case R.id.supportid : i= new Intent(this, ActivitySupportMessage.class);startActivity(i); break;
             case R.id.dangerid : i= new Intent(this,Emergency1.class);startActivity(i); break;
             default:break;
         }
