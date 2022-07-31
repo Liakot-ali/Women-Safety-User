@@ -2,7 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.womensafetyapp">
 
-    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="24" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="24" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -19,10 +25,9 @@
         <activity
             android:name=".Chatting.ActivityChatMessage"
             android:exported="false" />
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value=" AIzaSyBXUo717o-AO5OdQr6XzahxI4EZC3PQQ2U" />
+            android:value="AIzaSyBXUo717o-AO5OdQr6XzahxI4EZC3PQQ2U" />
 
         <activity
             android:name=".NearbyHospital"

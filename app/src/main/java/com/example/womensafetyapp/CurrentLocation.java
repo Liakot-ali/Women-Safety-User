@@ -69,6 +69,11 @@ public class CurrentLocation extends FragmentActivity implements OnMapReadyCallb
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_current_location);
 
+        userName = getIntent().getStringExtra("UserName");
+        emergency1 = getIntent().getStringExtra("Emergency1");
+        emergency2 = getIntent().getStringExtra("Emergency2");
+        Log.d("Number", emergency1 + " " + emergency2);
+
         SupportMapFragment mapFragment = (SupportMapFragment) (getSupportFragmentManager()
                 .findFragmentById(R.id.map));
         mapFragment.getMapAsync(this);
@@ -95,8 +100,6 @@ public class CurrentLocation extends FragmentActivity implements OnMapReadyCallb
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(userLocation));
                     //mMap.animateCamera(CameraUpdateFactory.zoomBy(10));
 
-
-                    getUserInfo();
                     Log.d("Number", emergency1 + " " + emergency2);
                     String message = "I'm " + userName + ". I'm in danger. Please help me. My location is: \n" + "Latitude: " + location.getLatitude() + "\nLongitude: " + location.getLongitude();
                     SmsManager manager = SmsManager.getDefault();
@@ -105,6 +108,7 @@ public class CurrentLocation extends FragmentActivity implements OnMapReadyCallb
                             emergency1 = "+88" + emergency1;
                         }
                         manager.sendTextMessage(emergency1, null, message, null, null);
+                        Toast.makeText(CurrentLocation.this, "Danger SMS send in " + emergency1, Toast.LENGTH_SHORT).show();
                         Log.e("SendSMS", "Sms send in emergency 1" + emergency1);
                     }
                     if (emergency2.length() >= 10) {
@@ -112,6 +116,7 @@ public class CurrentLocation extends FragmentActivity implements OnMapReadyCallb
                             emergency1 = "+88" + emergency1;
                         }
                         Log.e("SendSMS", "Sms send in emergency 2" + emergency2);
+                        Toast.makeText(CurrentLocation.this, "Danger SMS send in " + emergency2, Toast.LENGTH_SHORT).show();
                         manager.sendTextMessage(emergency2, null, message, null, null);
                     }
                 } catch (Exception e) {
@@ -192,20 +197,6 @@ public class CurrentLocation extends FragmentActivity implements OnMapReadyCallb
 //
 //            }
 //        }
-    }
-    public void getUserInfo(){
-        userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        userRef = FirebaseFirestore.getInstance().collection("Users").document(userId);
-        userRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                ClassUserInfo info = documentSnapshot.toObject(ClassUserInfo.class);
-                assert info != null;
-                userName = info.getName();
-                emergency1 = info.getEmergency1();
-                emergency2 = info.getEmergency2();
-            }
-        });
     }
 
 }
