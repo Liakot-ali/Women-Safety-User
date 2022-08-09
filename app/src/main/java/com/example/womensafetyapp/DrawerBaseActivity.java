@@ -15,6 +15,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.example.womensafetyapp.Chatting.ActivityChatMessage;
 import com.example.womensafetyapp.Support.ActivitySupportMessage;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 
 public class DrawerBaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -68,6 +69,10 @@ public class DrawerBaseActivity extends AppCompatActivity implements NavigationV
                 startActivity(new Intent(this, Emergency1.class));
                 overridePendingTransition(0, 0);
                 break;
+            case R.id.nav_sign_out:
+                FirebaseAuth auth = FirebaseAuth.getInstance();
+                auth.signOut();
+                onBackPressed();
         }
         return false;
     }

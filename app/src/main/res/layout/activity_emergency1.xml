@@ -40,7 +40,7 @@
                 android:textColor="@color/black"
                 android:gravity="center"
                 android:layout_marginTop="5dp"
-                android:text="Get Current location"/>
+                android:text="Emergency Help"/>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
